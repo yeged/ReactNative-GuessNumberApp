@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Ale
 import Card from "../components/Card"
 import Colors from "../constants/Colors"
 import Input from "../components/Input"
+import NumberContain from "../components/NumberContain"
 
 const GameScreen = (props) => {
 
@@ -22,8 +23,8 @@ const GameScreen = (props) => {
 
     const confirmInputHandler = () => {
         const chosenNumber = parseInt(enteredValue);
-        if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99){
-            Alert.alert("Invalid Value", "Number has to be between 1-99", [{text: "Okay", style: "destructive", onPress: resetInputHandler}])
+        if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+            Alert.alert("Invalid Value", "Number has to be between 1-99", [{ text: "Okay", style: "destructive", onPress: resetInputHandler }])
             setEnteredValue("")
             return;
         }
@@ -34,37 +35,44 @@ const GameScreen = (props) => {
 
     let confirmOutput;
 
-    if(confirm){
-        confirmOutput = <Text>My number : {selectedNumber}</Text>
+    if (confirm) {
+
+        confirmOutput = (<Card style={styles.confirmStyle}>
+            <Text>You Selected</Text>
+            <NumberContain>{selectedNumber}</NumberContain>
+            <View>
+                <Button title="Start Game" />
+            </View>
+        </Card>)
     }
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.screen}>
-            <Text style={styles.title}>This is game GameScreen</Text>
-            <Card style={styles.inputContainer}>
-                <Text>Select a Number</Text>
-                <Input
-                    blurOnSubmit
-                    keyboardType="number-pad" 
-                    maxLength={2} 
-                    autoCorrect={false} 
-                    autoCapitalize={false} 
-                    style={styles.input} 
-                    onChangeText={numberInputHandler}
-                    value={enteredValue}
+            <View style={styles.screen}>
+                <Text style={styles.title}>This is game GameScreen</Text>
+                <Card style={styles.inputContainer}>
+                    <Text>Select a Number</Text>
+                    <Input
+                        blurOnSubmit
+                        keyboardType="number-pad"
+                        maxLength={2}
+                        autoCorrect={false}
+                        autoCapitalize={false}
+                        style={styles.input}
+                        onChangeText={numberInputHandler}
+                        value={enteredValue}
                     />
-                <View style={styles.buttonContainer}>
-                    <View style={styles.button}>
-                        <Button title="Reset" color={Colors.accent} onPress={resetInputHandler} />
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.button}>
+                            <Button title="Reset" color={Colors.accent} onPress={resetInputHandler} />
+                        </View>
+                        <View style={styles.button}>
+                            <Button title="Confirm" color={Colors.primary} onPress={confirmInputHandler} />
+                        </View>
                     </View>
-                    <View style={styles.button}>
-                        <Button title="Confirm" color={Colors.primary} onPress={confirmInputHandler} />
-                    </View>
-                </View>
-            </Card>
-            {confirmOutput}
-        </View>
+                </Card>
+                {confirmOutput}
+            </View>
         </TouchableWithoutFeedback>
     )
 
@@ -98,6 +106,10 @@ const styles = StyleSheet.create({
     input: {
         width: 35,
         textAlign: "center"
+    },
+    confirmStyle:{
+        marginVertical:20,
+        alignItems: "center"
     }
 })
 
