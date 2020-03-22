@@ -4,11 +4,29 @@ import Header from "./components/Header"
 import GameScreen from "./screens/GameScreen"
 import GameScreen2 from "./screens/GameScreen2"
 import GameOver from "./screens/GameOver";
+import * as Fonts from "expo-font"
+import { AppLoading } from "expo"
+
+function fetchFonts(){
+  return(
+    Fonts.loadAsync({
+      "open-sans": require("./assets/Fonts/OpenSans-Regular.ttf"),
+      "open-sans-bold": require("./assets/Fonts/OpenSans-Bold.ttf")
+    })
+  )
+}
 
 export default function App() {
 
   const [chosenNumber, setChosenNumber] = useState();
   const [gameRounds, setGameRounds] = useState(0);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  if(!dataLoaded){
+    return(
+      <AppLoading startAsync={fetchFonts} onFinish={() => setDataLoaded(true)}  />
+    )
+  }
 
   function newGameHandler(){
     setGameRounds(0);
