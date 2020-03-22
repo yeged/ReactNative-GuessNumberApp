@@ -9,7 +9,12 @@ function GameOver(props){
         <View style={styles.screen}>
             <TitleText>Game is Over</TitleText>
             <View style={styles.imageContainer}>
-            <Image style={styles.image} resizeMode="cover" source={require("../assets/original.png")}/>
+            <Image 
+            style={styles.image} 
+            resizeMode="cover" 
+            //source={require("../assets/original.png")}
+            source={{uri: "https://i.ytimg.com/vi/z0pPhTLvzu4/hqdefault.jpg"}}
+            />
             </View>
             <BodyText>Number of Rounds: {props.round}</BodyText>
             <BodyText>Your Number : {props.userNumber}</BodyText>
