@@ -7,6 +7,7 @@ import GameOver from "./screens/GameOver";
 import * as Fonts from "expo-font"
 import { AppLoading } from "expo"
 
+
 function fetchFonts(){
   return(
     Fonts.loadAsync({
