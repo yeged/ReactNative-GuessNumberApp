@@ -4,9 +4,10 @@ import BodyText from "../components/BodyText";
 import TitleText from "../components/TitleText"
 import Colors from "../constants/Colors";
 import MainButton from "../components/MainButton"
-
+import {ScreenOrientation} from "expo"
 
 function GameOver(props){
+    ScreenOrientation.lockAsync(ScreenOrientation.Orientation.PORTRAIT) // Locks the screen in PORTRAIT mode.
     return(
         <ScrollView>
         <View style={styles.screen}>
