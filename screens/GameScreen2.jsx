@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Alert, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Alert, ScrollView, FlatList } from "react-native";
 import GameScreen from "./GameScreen";
 import NumberContain from "../components/NumberContain";
 import Card from "../components/Card";
@@ -20,11 +20,11 @@ function generateRandomBetween(min, max, exclude) {
     }
 }
 
-function renderListItem(value, numOfRound) {
+function renderListItem(numOfRound, itemData) {
     return (
-        <View key={value} style={styles.listItem}>
-            <BodyText>#{numOfRound}</BodyText>
-            <BodyText>{value}</BodyText>
+        <View  style={styles.listItem}>
+            <BodyText>#{numOfRound - itemData.index}</BodyText>
+            <BodyText>{itemData.item}</BodyText>
         </View>
     )
 
@@ -71,9 +71,17 @@ function GameScreen2(props) {
                 <MainButton onPress={nextGuessHandler.bind(this, "greater")} > <Ionicons name="md-add" size={24} color="white" /> </MainButton>
             </Card>
             <View style={styles.listContainer}>
-            <ScrollView contentContainerStyle={styles.list}>
+            {/* <ScrollView contentContainerStyle={styles.list}>
                 {pastGuess.map((value, index) => renderListItem(value, pastGuess.length - index))}
-            </ScrollView>
+            </ScrollView> */}
+
+            <FlatList 
+                keyExtractor={(item) => item}
+                data={pastGuess}
+                renderItem={renderListItem.bind(this, pastGuess.length)}
+                contentContainerStyle={styles.list}
+            />
+
             </View>
 
         </View>
@@ -101,15 +109,14 @@ const styles = StyleSheet.create({
         borderWidth:1,
         flexDirection: "row",
         justifyContent: "space-around",
-        width: "60%"
+        width: "100%"
     },
     listContainer:{
         flex:1,
-        width:"80%"
+        width:"60%"
     },
     list:{
         flexGrow: 1, //for flex-end works and ScrollView
-        alignItems: "center",
         justifyContent: "flex-end"
     }
 
