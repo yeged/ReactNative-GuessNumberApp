@@ -63,6 +63,7 @@ const GameScreen = (props) => {
         </Card>)
     }
 
+
     //This is for Ios ===> behavior=position
     return (
         <ScrollView>
