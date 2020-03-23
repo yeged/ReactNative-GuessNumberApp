@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, ScrollView, KeyboardAvoidingView } from "react-native";
 
 import Card from "../components/Card"
@@ -14,6 +14,20 @@ const GameScreen = (props) => {
     const [enteredValue, setEnteredValue] = useState("");
     const [confirm, setConfirm] = useState(false);
     const [selectedNumber, setSelectedNumber] = useState();
+    const [buttonWidth, setButtonWidth] = useState(Dimensions.get("window").width / 4);
+
+   
+
+    useEffect(() => {
+        function updateLayout(){
+            setButtonWidth(Dimensions.get("window").width /4)
+        }
+    
+        Dimensions.addEventListener("change", updateLayout)
+        return () => {
+            Dimensions.removeEventListener("change", updateLayout)
+        }
+    })
 
     const numberInputHandler = (textInput) => {
         setEnteredValue(textInput.replace(/[^0-9]/g, ""));
@@ -69,10 +83,10 @@ const GameScreen = (props) => {
                         value={enteredValue}
                     />
                     <View style={styles.buttonContainer}>
-                        <View style={styles.button}>
+                        <View style={{width: buttonWidth}}>
                             <Button title="Reset" color={Colors.accent} onPress={resetInputHandler} />
                         </View>
-                        <View style={styles.button}>
+                        <View style={{width: buttonWidth}}>
                             <Button title="Confirm" color={Colors.primary} onPress={confirmInputHandler} />
                         </View>
                     </View>
@@ -109,10 +123,10 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingHorizontal: 15
     },
-    button: {
-        //width: "45%",
-        width: Dimensions.get("window").width / 4
-    },
+    // button: {
+    //     //width: "45%",
+    //     width: Dimensions.get("window").width / 4
+    // },
     input: {
         width: 35,
         textAlign: "center"
