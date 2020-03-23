@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import BodyText from "../components/BodyText";
 import TitleText from "../components/TitleText"
 
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         height: 90,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: Colors.primary,
+        backgroundColor: Platform.OS === "android" ? Colors.primary : Colors.accent,
         paddingTop: 36
     },
     headerTitle: {

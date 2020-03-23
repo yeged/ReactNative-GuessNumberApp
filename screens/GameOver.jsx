@@ -7,7 +7,7 @@ import MainButton from "../components/MainButton"
 import {ScreenOrientation} from "expo"
 
 function GameOver(props){
-    ScreenOrientation.lockAsync(ScreenOrientation.Orientation.PORTRAIT) // Locks the screen in PORTRAIT mode.
+    ScreenOrientation.lockAsync(ScreenOrientation.Orientation.PORTRAIT) // Locks the screen in PORTRAIT mode. 
     return(
         <ScrollView>
         <View style={styles.screen}>
