@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions, ScrollView, KeyboardAvoidingView } from "react-native";
 
 import Card from "../components/Card"
 import Colors from "../constants/Colors"
@@ -49,7 +49,10 @@ const GameScreen = (props) => {
         </Card>)
     }
 
+    //This is for Ios ===> behavior=position
     return (
+        <ScrollView>
+        <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={30}> 
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}>
                 <TitleText style={styles.title}>Start a new Game</TitleText>
@@ -77,6 +80,8 @@ const GameScreen = (props) => {
                 {confirmOutput}
             </View>
         </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+        </ScrollView>
     )
 
 }
